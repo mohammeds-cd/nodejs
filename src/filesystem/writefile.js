@@ -1,11 +1,18 @@
 const fs = require("fs");
 
-const writeFile = (path, content) => {
-  fs.writeFile(path, content, (err) => {
+const writeFile = (path, filename, content) => {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path);
+  }
+  fs.writeFile(`${path}/${filename}`, content, { flag: "wx" }, (err) => {
     if (err) {
-      return console.log(err);
+      fs.appendFile(`${path}/${filename}`, content, (err) => {
+        if (err) console.log(err);
+        console.log("File appended");
+      });
+    } else {
+      console.log("File saved.");
     }
-    console.log("The file was saved!");
   });
 };
 
