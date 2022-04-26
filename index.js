@@ -9,8 +9,11 @@ programs.wait(5000, "data");
 write.writeFile("./src/docs/write", "write.txt", " Write to file s"); */
 
 const express = require("express");
+const controller = require("./src/controller/controller");
 const app = express();
 const port = process.env.PORT || 3005;
+
+app.get("/squareRoot", controller.calculateSquare);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
