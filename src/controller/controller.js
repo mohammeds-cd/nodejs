@@ -5,7 +5,7 @@ function calculateSquare(request, response) {
   let number = request.query.number;
   let square = programs.squareOfNumber(number);
   return response.send(
-    responseBuilder.buildResponse({ number: number, square: square })
+    responseBuilder.buildSucessResponse({ number: number, square: square })
   );
 }
 

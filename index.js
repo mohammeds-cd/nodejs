@@ -10,8 +10,11 @@ write.writeFile("./src/docs/write", "write.txt", " Write to file s"); */
 
 const express = require("express");
 const controller = require("./src/controller/controller");
+const apiRoutes = require("./src/routes/index");
 const app = express();
 const port = process.env.PORT || 3005;
+
+app.use("/api/v1", apiRoutes);
 
 app.get("/squareRoot", controller.calculateSquare);
 

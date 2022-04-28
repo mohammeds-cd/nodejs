@@ -1,5 +1,5 @@
-function buildResponse(data) {
+function buildSucessResponse(data) {
   return { code: 200, message: "Request was sucessfull", data: data };
 }
 
-module.exports = { buildResponse };
+module.exports = { buildSucessResponse };
