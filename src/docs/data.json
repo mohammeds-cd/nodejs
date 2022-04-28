@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Godown 1",
+    "location": "Hyderabad"
+  },
+  {
+    "id": 2,
+    "name": "Godown 2",
+    "location": "Bangalore"
+  },
+  {
+    "id": 3,
+    "name": "Godown 3",
+    "location": "Chennai"
+  },
+  {
+    "id": 4,
+    "name": "Godown 4",
+    "location": "Hyderabad"
+  }
+]
