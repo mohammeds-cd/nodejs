@@ -18,5 +18,10 @@
     "id": 4,
     "name": "Godown 4",
     "location": "Hyderabad"
+  },
+  {
+    "id": 5,
+    "name": "Godown 5",
+    "location": "Bangalore"
   }
 ]

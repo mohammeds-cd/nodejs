@@ -34,11 +34,12 @@ router.post("/saveGodown", (request, response) => {
   let godowns = jsonFile.getJsonFile(jsonPath);
   let newGodown = request.body;
   let godownExists = false;
-  godowns.forEach((godown) => {
+  for (const godown of godowns) {
     if (godown.name === newGodown.name) {
       godownExists = true;
+      break;
     }
-  });
+  }
   if (godownExists) {
     response.send(responseBuilder.buildFailureResponse("Godown name already exists!"));
   } else {
