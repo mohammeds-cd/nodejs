@@ -25,5 +25,14 @@
     "hobby": "Tech",
     "verifiedEmail": false,
     "active": true
+  },
+  {
+    "name": "Saif",
+    "phoneNumber": "9700143502",
+    "email": "shope@gmail.com",
+    "password": "test@123",
+    "hobby": "Tech",
+    "verifiedEmail": false,
+    "active": false
   }
 ]

@@ -31,16 +31,17 @@ function signUp(request, response) {
 function login(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     let loginDetails = request.body;
-    let loggedInUser = users.filter((user) => {
+    let loggedInUser = users.find((user) => {
         if ((loginDetails.email && user.email === loginDetails.email) || (loginDetails.phoneNumber && user.phoneNumber === loginDetails.phoneNumber)) {
             return true;
         }
         return false;
-    })[0];
+    });
     if (loggedInUser) {
         if (loggedInUser.password === loginDetails.password) {
+            delete loggedInUser.password;
             return response.send(
-                responseBuilder.buildSucessResponse({ user: "Logged in" })
+                responseBuilder.buildSucessResponse({ user: loggedInUser })
             );
         } else {
             response.send(responseBuilder.buildFailureResponse("Incorrect password"));

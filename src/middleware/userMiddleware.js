@@ -1,4 +1,6 @@
 const responseBuilder = require("../helper/responseBuilder");
+const aes256 = require('aes256');
+var key = 'HJlsie132334';
 
 
 function signUpValidator(req, res, next) {
@@ -18,6 +20,17 @@ function signUpValidator(req, res, next) {
     }
 }
 
+
+function encrypt(req, res, next) {
+    var encryptedData = aes256.encrypt(key, req.body);
+    return encryptedData;
+}
+
+function decrypt(req, res, next) {
+    var decryptedData = aes256.decrypt(key, req.body.data);
+    req.body = JSON.parse(decryptedData);
+    next();
+}
 
 function validateName(name) {
     if (name[0].toUpperCase() === name[0]) {
@@ -54,4 +67,4 @@ function validatePassword(password) {
     }
 }
 
-module.exports = { signUpValidator };
+module.exports = { signUpValidator, encrypt, decrypt };
