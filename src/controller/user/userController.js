@@ -1,11 +1,10 @@
-const router = require("express").Router();
 const responseBuilder = require("../../helper/responseBuilder");
 var path = require("path");
 var jsonPath = path.join(__dirname, "..", "..", "docs", "users.json");
 const jsonFile = require('../../helper/jsonFile');
 
 
-router.post("/signup", (request, response) => {
+function signUp(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     let newUser = request.body;
     let userExists = false;
@@ -25,10 +24,11 @@ router.post("/signup", (request, response) => {
             responseBuilder.buildSucessResponse({ user: "User registered,please login" })
         );
     }
-});
+}
 
 
-router.post("/login", (request, response) => {
+
+function login(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     let loginDetails = request.body;
     let loggedInUser = users.filter((user) => {
@@ -48,10 +48,10 @@ router.post("/login", (request, response) => {
     } else {
         response.send(responseBuilder.buildFailureResponse("User with email or  phone number doesnt exist!"));
     }
-});
+}
 
 
-router.get("/getActiveUsers", (request, response) => {
+function getActiveUsers(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     let filteredUsers = users.filter((user) => {
         if (user.active) {
@@ -62,10 +62,9 @@ router.get("/getActiveUsers", (request, response) => {
     return response.send(
         responseBuilder.buildSucessResponse({ users: filteredUsers })
     );
-});
+}
 
-
-router.get("/getVerfiedUsers", (request, response) => {
+function getVerfiedUsers(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     let filteredUsers = users.filter((user) => {
         if (user.verifiedEmail) {
@@ -76,6 +75,7 @@ router.get("/getVerfiedUsers", (request, response) => {
     return response.send(
         responseBuilder.buildSucessResponse({ users: filteredUsers })
     );
-});
+}
 
-module.exports = router;
+
+module.exports = { signUp, login, getActiveUsers, getVerfiedUsers };
