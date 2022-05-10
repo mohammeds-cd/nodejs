@@ -9,20 +9,16 @@ router.get("/getGodowns", (request, response) => {
   let godowns = jsonFile.getJsonFile(jsonPath);
   let data;
   let length = Object.keys(request.query).length;
+  let filters = request.query;
   if (length == 0) {
     data = godowns;
   } else {
     data = godowns.filter((godown) => {
-      if (
-        (length > 1 &&
-          godown.location === request.query.location &&
-          godown.name === request.query.name) ||
-        (length == 1 && godown.location === request.query.location) ||
-        godown.name === request.query.name
-      ) {
-        return true;
+      let isValid = true;
+      for (key in filters) {
+        isValid = isValid && godown[key] == filters[key];
       }
-      return false;
+      return isValid;
     });
   }
   return response.send(
