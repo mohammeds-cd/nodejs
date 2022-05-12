@@ -1,38 +1,24 @@
 [
   {
+    "id": 1,
     "name": "Saif",
     "phoneNumber": "9700143502",
     "email": "shop@gmail.com",
     "password": "test@123",
     "hobby": "Tech",
     "verifiedEmail": false,
-    "active": false
+    "active": false,
+    "role": "admin"
   },
   {
+    "id": 2,
     "name": "Saif 12",
     "phoneNumber": "9700143503",
     "email": "shop1@gmail.com",
     "password": "test@123",
     "hobby": "Tech",
     "verifiedEmail": true,
-    "active": false
-  },
-  {
-    "name": "Saif 23",
-    "phoneNumber": "9700143504",
-    "email": "shop2@gmail.com",
-    "password": "test@123",
-    "hobby": "Tech",
-    "verifiedEmail": false,
-    "active": true
-  },
-  {
-    "name": "Saif",
-    "phoneNumber": "9700143502",
-    "email": "shope@gmail.com",
-    "password": "test@123",
-    "hobby": "Tech",
-    "verifiedEmail": false,
-    "active": false
+    "active": false,
+    "role": "user"
   }
 ]

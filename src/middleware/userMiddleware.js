@@ -1,4 +1,5 @@
 const responseBuilder = require("../helper/responseBuilder");
+const encryption = require('../helper/encryption');
 const aes256 = require('aes256');
 var key = 'HJlsie132334';
 
@@ -20,10 +21,27 @@ function signUpValidator(req, res, next) {
     }
 }
 
+function decrypt(req, res, next) {
+    var decryptedData = aes256.decrypt(key, req.body.data);
+    req.body = JSON.parse(decryptedData);
+    next();
+}
 
-function encrypt(req, res, next) {
-    var encryptedData = aes256.encrypt(key, req.body);
-    return encryptedData;
+
+function checkAdminRole(req, res, next) {
+    let body = req.body;
+    if (!body.authToken) {
+        return res.send(responseBuilder.buildFailureResponse("Authentication token missing!"));
+    } else {
+        let data = encryption.decrypt(body.authToken);
+        let timeDiff = data.exp - Date.now();
+        if (timeDiff < 0) {
+            return res.send(responseBuilder.buildFailureResponse("Token expired!"));
+        } else {
+            Object.assign(req.body, data);
+            next();
+        }
+    }
 }
 
 function decrypt(req, res, next) {
@@ -67,4 +85,4 @@ function validatePassword(password) {
     }
 }
 
-module.exports = { signUpValidator, encrypt, decrypt };
+module.exports = { signUpValidator, checkAdminRole, decrypt };

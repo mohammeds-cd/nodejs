@@ -2,6 +2,7 @@ const responseBuilder = require("../../helper/responseBuilder");
 var path = require("path");
 var jsonPath = path.join(__dirname, "..", "..", "docs", "users.json");
 const jsonFile = require('../../helper/jsonFile');
+const encryption = require('../../helper/encryption');
 
 
 function signUp(request, response) {
@@ -17,7 +18,7 @@ function signUp(request, response) {
     if (userExists) {
         response.send(responseBuilder.buildFailureResponse("User with email already exists!"));
     } else {
-        Object.assign(newUser, { verifiedEmail: false, active: false });
+        Object.assign(newUser, { verifiedEmail: false, active: false, role: "user" });
         users.push(newUser);
         jsonFile.writeJsonFile(jsonPath, users);
         return response.send(
@@ -40,6 +41,7 @@ function login(request, response) {
     if (loggedInUser) {
         if (loggedInUser.password === loginDetails.password) {
             delete loggedInUser.password;
+            loggedInUser.authToken = encryption.encrypt(JSON.stringify({ id: loggedInUser.id, exp: Date.now() + (30 * 1000) }));
             return response.send(
                 responseBuilder.buildSucessResponse({ user: loggedInUser })
             );
@@ -49,6 +51,25 @@ function login(request, response) {
     } else {
         response.send(responseBuilder.buildFailureResponse("User with email or  phone number doesnt exist!"));
     }
+}
+
+function assignRole(request, response) {
+    let body = request.body;
+    let users = jsonFile.getJsonFile(jsonPath);
+    for (const user of users) {
+        if (user.id === body.id) {
+            if (user.role !== "admin") {
+                response.send(responseBuilder.buildFailureResponse("Authentication failed,only admin can assign roles!"));
+            } else {
+                user.role = body.role;
+            }
+            break;
+        }
+    }
+    jsonFile.writeJsonFile(jsonPath, users);
+    return response.send(
+        responseBuilder.buildSucessResponse("role sucessfully updated!")
+    );
 }
 
 
@@ -79,4 +100,4 @@ function getVerfiedUsers(request, response) {
 }
 
 
-module.exports = { signUp, login, getActiveUsers, getVerfiedUsers };
+module.exports = { signUp, login, getActiveUsers, getVerfiedUsers, assignRole };
