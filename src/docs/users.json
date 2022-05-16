@@ -3,22 +3,12 @@
     "id": 1,
     "name": "Saif",
     "phoneNumber": "9700143502",
-    "email": "shop@gmail.com",
-    "password": "test@123",
+    "email": "mohammeds@clouddestinations.com",
+    "password": "$2a$10$7WvK2BepYp/B0I9Hpj3aIu7q/uve2sJfd1Cc/TjM/WrVFiKAIwgfG",
     "hobby": "Tech",
-    "verifiedEmail": false,
-    "active": false,
-    "role": "user"
-  },
-  {
-    "id": 2,
-    "name": "Saif 12",
-    "phoneNumber": "9700143503",
-    "email": "shop1@gmail.com",
-    "password": "test@123",
-    "hobby": "Tech",
+    "verificationToken": "shnlPXucYRBUJswW27XSGLe55ebvyO587A5W949paHjq5LdFMC6TbNMAwttEfgXa",
     "verifiedEmail": true,
-    "active": false,
-    "role": "user"
+    "role": "user",
+    "link": "http://localhost:3005/api/v1/user/verifyEmail?email=mohammeds@clouddestinations.com&token=shnlPXucYRBUJswW27XSGLe55ebvyO587A5W949paHjq5LdFMC6TbNMAwttEfgXa"
   }
 ]
