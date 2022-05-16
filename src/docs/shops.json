@@ -5,69 +5,19 @@
     "location": "Bangalore",
     "phoneNumber": "9700134502",
     "email": "shop1@gmail.com",
-    "medicineList": [
-      {
-        "name": "Medicine 1",
-        "quantity": 5,
-        "company": "Rx",
-        "godownId": 1,
-        "shopId": 1
-      },
-      {
-        "name": "Medicine 2",
-        "quantity": 5,
-        "company": "Cipla",
-        "godownId": 2,
-        "shopId": 1
-      }
-    ],
-    "orders": [
-      {
-        "customerId": 1,
-        "orderId": 2,
-        "shopId": 1,
-        "medicineName": "Medicine 1",
-        "quantity": 1
-      }
+    "medicines": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
     ]
   },
   {
     "id": 2,
-    "name": "Shop 2",
+    "name": "Shop update",
     "location": "Hyderabad",
     "phoneNumber": "9700134503",
-    "email": "shop2@gmail.com",
-    "medicineList": [
-      {
-        "name": "Medicine 1",
-        "quantity": 19,
-        "company": "Rx",
-        "godownId": 1,
-        "shopId": 2
-      },
-      {
-        "name": "Medicine 3",
-        "quantity": 20,
-        "company": "Rx",
-        "godownId": 4,
-        "shopId": 2
-      },
-      {
-        "name": "Medicine 4",
-        "quantity": 15,
-        "company": "Cipla",
-        "godownId": 5,
-        "shopId": 2
-      }
-    ],
-    "orders": [
-      {
-        "customerId": 1,
-        "orderId": 2,
-        "shopId": 2,
-        "medicineName": "Medicine 1",
-        "quantity": 10
-      }
-    ]
+    "email": "shop2@gmail.com"
   }
 ]

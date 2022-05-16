@@ -37,7 +37,10 @@ function checkAdminRole(req, res, next) {
         let timeDiff = data.exp - Date.now();
         if (timeDiff < 0) {
             return res.send(responseBuilder.buildFailureResponse("Token expired!"));
-        } else {
+        } else if (data.role !== "admin") {
+            res.send(responseBuilder.buildFailureResponse("Authentication failed,only admin can assign roles!"));
+        }
+        else {
             Object.assign(req.body, data);
             next();
         }

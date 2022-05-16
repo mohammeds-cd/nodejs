@@ -41,7 +41,7 @@ function login(request, response) {
     if (loggedInUser) {
         if (loggedInUser.password === loginDetails.password) {
             delete loggedInUser.password;
-            loggedInUser.authToken = encryption.encrypt(JSON.stringify({ id: loggedInUser.id, exp: Date.now() + (30 * 1000) }));
+            loggedInUser.authToken = encryption.encrypt(JSON.stringify({ id: loggedInUser.id, role: loggedInUser.role, exp: Date.now() + (30 * 1000) }));
             return response.send(
                 responseBuilder.buildSucessResponse({ user: loggedInUser })
             );
@@ -58,11 +58,7 @@ function assignRole(request, response) {
     let users = jsonFile.getJsonFile(jsonPath);
     for (const user of users) {
         if (user.id === body.id) {
-            if (user.role !== "admin") {
-                response.send(responseBuilder.buildFailureResponse("Authentication failed,only admin can assign roles!"));
-            } else {
-                user.role = body.role;
-            }
+            user.role = body.role;
             break;
         }
     }

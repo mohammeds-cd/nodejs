@@ -24,6 +24,21 @@ function saveShop(request, response) {
     }
 }
 
+function updateShop(request, response) {
+    let shops = jsonFile.getJsonFile(jsonPath);
+    let updateShop = request.body;
+    shops.forEach((shop, index) => {
+        if (shop.id === updateShop.id) {
+            shops[index] = updateShop;
+
+        }
+    });
+    jsonFile.writeJsonFile(jsonPath, shops);
+    return response.send(
+        responseBuilder.buildSucessResponse({ shop: updateShop })
+    );
+}
+
 function searchMedicine(request, response) {
     let shops = jsonFile.getJsonFile(jsonPath);
     let data;
@@ -39,6 +54,25 @@ function searchMedicine(request, response) {
     }
     return response.send(
         responseBuilder.buildSucessResponse({ shopsList: data })
+    );
+}
+
+function addMedicine(request, response) {
+    let shops = jsonFile.getJsonFile(jsonPath);
+    let medicineRequest = request.body;
+    for (let shop of shops) {
+        if (shop.id === medicineRequest.shopId) {
+            if (shop.medicines) {
+                shop.medicines = shop.medicines.concat(medicineRequest.medicines);
+            } else {
+                shop.medicines = medicineRequest.medicines;
+            }
+            break;
+        }
+    }
+    jsonFile.writeJsonFile(jsonPath, shops);
+    return response.send(
+        responseBuilder.buildSucessResponse({ message: "Medicines added sucessfully" })
     );
 }
 
@@ -112,4 +146,4 @@ function placeOrder(request, response) {
 };
 
 
-module.exports = { saveShop, getShops, placeOrder, searchMedicine, checkMedicine };
+module.exports = { saveShop, getShops, placeOrder, searchMedicine, checkMedicine, addMedicine, updateShop };
